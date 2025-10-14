@@ -15,7 +15,7 @@ public class UserService {
     private  String TOKEN ;
 
     private final OkHttpClient client = new OkHttpClient();
-
+    private Request.Builder requestBuilder(String url) { return new Request.Builder() .url(url) .addHeader("Authorization", "Bearer " + TOKEN) .addHeader("Content-Type", "application/json"); }
     // Create User
     public String createUser(User user) throws Exception {
         String json = String.format("{\"uid\":\"%s\",\"name\":\"%s\",\"email\":\"%s\"}",
@@ -32,6 +32,7 @@ public class UserService {
             return response.body().string();
         }
     }
+
 
     //  List Users
     public String listUsers() throws Exception {
